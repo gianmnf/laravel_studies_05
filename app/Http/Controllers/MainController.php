@@ -43,9 +43,38 @@ class MainController extends Controller
         // $this->showRawData($results);
 
         // specific id
-        $results = DB::table('products')->find(10);
-        $this->showRawData($results);
+        // $results = DB::table('products')->find(10);
+        // $this->showRawData($results);
 
+        // select with where clause
+        // $products = DB::table('products')->where('id', 20)->first();
+        // $products = DB::table('products')->where('id', '>=', 10)->get();
+                
+        // $products = DB::table('products')
+        //             ->select('product_name', 'price')
+        //             ->get();
+        // $this->showDataTable($products);
+
+        // $products = DB::table('products')
+        //             ->select('product_name')->get();
+        // $this->showDataTable($products);
+
+        // $products = DB::table('products')
+        //             ->where('price', '>', 50)
+        //             ->get();
+        // $this->showDataTable($products);
+
+        // $products = DB::table('products')
+        //             ->where('price', '>', 50)
+        //             ->where('product_name', 'like', 'A%')
+        //             ->get();
+        // $this->showDataTable($products);
+
+        $products = DB::table('products')
+                    ->where('price', '>', 80)
+                    ->orWhere('product_name', 'like', 'A%')
+                    ->get();
+        $this->showDataTable($products);
 
         //$this->showRawData($products);
         // $this->showDataTable($clients);
