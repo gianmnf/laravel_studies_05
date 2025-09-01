@@ -165,8 +165,35 @@ class MainController extends Controller
         //             ->get();
         // $this->showDataTable($clients);
 
-        //$this->showRawData($products);
-        // $this->showDataTable($clients);
+        // sum, count, min, max, avg
+        /* $count = DB::table('products')->count();
+        $max_price = DB::table('products')->max('price');
+        $min_price = DB::table('products')->min('price');
+        $avg_price = DB::table('products')->avg('price');
+        $sum_prices = DB::table('products')->sum('price');
+
+        echo '<pre>';
+        print_r([
+            'count' => $count,
+            'max_price' => $max_price,
+            'min_price' => $min_price,
+            'avg_price' => $avg_price,
+            'sum_prices' => $sum_prices,
+        ]);
+        echo '</pre>'; */
+
+        // order products by highest price
+        /* $results = DB::table('products')
+                    ->orderBy('price', 'desc')
+                    ->get();
+        $this->showDataTable($results); */
+
+        // get only the 3 products with the highest prices
+        $results = DB::table('products')
+                    ->orderBy('price', 'desc')
+                    ->limit(3)
+                    ->get();
+        $this->showDataTable($results);
     }
 
     private function showRawData($data)
