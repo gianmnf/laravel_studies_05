@@ -5,195 +5,78 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MainController extends Controller
 {
     public function index()
     {
-        // returning all data from a table
-        // $clients = DB::table('clients')->get();
-        // $this->showRawData($clients);
+        // INSERT
 
-        // show in a array
-        // $clients = DB::table('clients')->get()->toArray();
-        // $this->showRawData($clients);
+        // Add a new client
+        
+        /* $new_client = [
+            'client_name' => 'John Doe',
+            'email' => 'johndoe@gmail.com'
+        ];
+        DB::table('clients')->insert($new_client); */
 
-        // show in a array of arrays
-        // $results = DB::table('products')->get()->map(function($item){
-        //     return (array) $item;
-        // });
-        // $this->showRawData($results);
+        /* DB::table('clients')->insert([
+            'client_name' => 'John Doe',
+            'email' => 'johndoe@gmail.com'
+        ]); */
 
-        // show data from the results
-        // $products = DB::table('products')->get();
-        // foreach ($products as $product) {
-        //     echo $product->product_name . '<br>';
-        // }
-        // $this->showRawData($products);
+        // add two clients
+        /* DB::table('clients')->insert([
+            [
+                'client_name' => 'Client 1',
+                'email' => 'client1@gmail.com'
+            ],
+            [
+                'client_name' => 'Client 2',
+                'email' => 'client2@gmail.com'
+            ]
+        ]); */
 
-        // get only a few columns
-        // $products = DB::table('products')->get(['product_name', 'price']);
-        // $this->showDataTable($products);
+        /* DB::table('clients')->insert([
+            [
+                'client_name' => 'Client 1',
+                'email' => 'client1@gmail.com',
+                'created_at' => Carbon::now()
+            ],
+            [
+                'client_name' => 'Client 2',
+                'email' => 'client2@gmail.com',
+                'created_at' => Carbon::now()
+            ]
+        ]); */
 
-        // pluck - get data from a column in a simple way
-        // $results = DB::table('products')->pluck('product_name');
-        // $this->showRawData($results);
+        // UPDATE
+        /* DB::table('clients')
+            ->where('id', 1)
+            ->update([
+                'client_name' => 'UPDATED',
+                'email' => 'updated@gmail.com',
+            ]); */
 
-        // return only the first line of a result
-        // $results = DB::table('products')->get()->first();
-        // $this->showRawData($results);
+        /* DB::table('clients')
+            ->where('client_name', 'Catarina Melany Cunha')
+            ->update([
+                'email' => 'new@gmail.com',
+            ]); */
 
-        // return only the last line of result
-        // $results = DB::table('products')->get()->last();
-        // $this->showRawData($results);
+        // DELETE - HARD
+        /* DB::table('clients')
+             ->where('id', 10)
+             ->delete();
+         */
 
-        // specific id
-        // $results = DB::table('products')->find(10);
-        // $this->showRawData($results);
-
-        // select with where clause
-        // $products = DB::table('products')->where('id', 20)->first();
-        // $products = DB::table('products')->where('id', '>=', 10)->get();
-         
-        // select multiple columns
-        // $products = DB::table('products')
-        //             ->select('product_name', 'price')
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // select a single column
-        // $products = DB::table('products')
-        //             ->select('product_name')->get();
-        // $this->showDataTable($products);
-
-        // where greater than
-        // $products = DB::table('products')
-        //             ->where('price', '>', 50)
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // multiple wheres
-        // $products = DB::table('products')
-        //             ->where('price', '>', 50)
-        //             ->where('product_name', 'like', 'A%')
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where and or where (same as above but in a cleaner way)
-        // $products = DB::table('products')
-        //             ->where('price', '>', 80)
-        //             ->orWhere('product_name', 'like', 'A%')
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // array of conditions
-        // $products = DB::table('products')
-        //             ->where([
-        //                 ['price', '>', 50],
-        //                 ['product_name', 'like', 'A%']
-        //             ])
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // or where with a builder
-        // $products = DB::table('products')
-        //             ->where('price', '>', 90)
-        //             ->orWhere(function(Builder $query) {
-        //                 $query->where('product_name', 'Banana')
-        //                 ->orWhere('product_name', 'Cereja');
-        //             })
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // not like
-        // $products = DB::table('products')
-        //             ->where('product_name', 'not like', 'M%')
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // like
-        // $products = DB::table('products')
-        //             ->whereNot('product_name', 'like', 'M%')
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where any of the conditions is true
-        // $results = DB::table('clients')
-        //             ->whereAny(['client_name', 'email'], 'like', '%va%')
-        //             ->get();
-        // $this->showDataTable($results);
-
-        // where is between two values
-        // $products = DB::table('products')
-        //             ->whereBetween('price', [25, 50])
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where is not between two values
-        // $products = DB::table('products')
-        //             ->whereNotBetween('price', [25, 50])
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where the column is equal to the values inside the array
-        // $products = DB::table('products')
-        //             ->whereIn('id', [1, 3, 5])
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where the column is not equal to the values inside the array
-        // $products = DB::table('products')
-        //             ->whereNotIn('id', [1, 3, 5])
-        //             ->get();
-        // $this->showDataTable($products);
-
-        // where the column is not null
-        // $clients = DB::table('clients')
-        //             ->whereNotNull('deleted_at')
-        //             ->get();
-        // $this->showDataTable($clients);
-
-        // where the date is equals to
-        // $clients = DB::table('clients')
-        //             ->whereDate('created_at', '2032-02-14')
-        //             ->get();
-        // $this->showDataTable($clients);
-
-        // where the day is equals to
-        // $clients = DB::table('clients')
-        //             ->whereDay('created_at', '10')
-        //             ->get();
-        // $this->showDataTable($clients);
-
-        // sum, count, min, max, avg
-        /* $count = DB::table('products')->count();
-        $max_price = DB::table('products')->max('price');
-        $min_price = DB::table('products')->min('price');
-        $avg_price = DB::table('products')->avg('price');
-        $sum_prices = DB::table('products')->sum('price');
-
-        echo '<pre>';
-        print_r([
-            'count' => $count,
-            'max_price' => $max_price,
-            'min_price' => $min_price,
-            'avg_price' => $avg_price,
-            'sum_prices' => $sum_prices,
-        ]);
-        echo '</pre>'; */
-
-        // order products by highest price
-        /* $results = DB::table('products')
-                    ->orderBy('price', 'desc')
-                    ->get();
-        $this->showDataTable($results); */
-
-        // get only the 3 products with the highest prices
-        $results = DB::table('products')
-                    ->orderBy('price', 'desc')
-                    ->limit(3)
-                    ->get();
-        $this->showDataTable($results);
+        // DELETE - SOFT
+        DB::table('clients')
+             ->where('id', 11)
+             ->update([
+                'deleted_at' => Carbon::now()
+             ]);
     }
 
     private function showRawData($data)
